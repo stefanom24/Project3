@@ -8,33 +8,24 @@ using namespace std;
 
 Player::Player()
 {
-    title = "";
-    author = "";
+    playerName = "";
+    
 }
 
-Book::Book(string new_title, string new_author)
+Player::Player(string new_player)
 {
-    title = new_title;
-    author = new_author;
+    playerName = new_player;
 }
 
 
-string Book::getTitle()
+string Player::getPlayerName()
 {
-    return title;
-}
-string Book::getAuthor()
-{
-    return author;
+    return playerName;
 }
 
 
-void Book :: setTitle(string new_title)
-{
-    title = new_title;
-}
-void Book :: setAuthor(string new_author)
-{
-    author = new_author;
-}
 
+void Player :: setPlayerName(string new_player)
+{
+    playerName = new_player;
+}
