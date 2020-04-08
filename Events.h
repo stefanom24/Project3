@@ -9,6 +9,7 @@ class Events{
   private:
     int currentDay;
     int locationID;
+    
   public: 
     Events();
     Events(int, int);
