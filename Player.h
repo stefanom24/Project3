@@ -8,7 +8,7 @@ class Player
     private:
    
     string playerName;
-    
+    int userSupplies[15];
    
     public:
     
