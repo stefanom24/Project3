@@ -1,28 +1,6 @@
-class Enemies
-{
-    private:
-   
-    string enemieName;
-    int enemieStats[3];
-    
-   
-    public:
-    
-    Enemie();
-    Enemie(string);
-   
-    string getEnemiename();
-    int getStatsAt(int);
-   
-    void setEnemiename(string);
-    bool setStatesAt(int , int); //takes an index, rating value
-    
-
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Book.h"
-#include "User.h"
 
 using namespace std;
 Enemie::Enemie()
