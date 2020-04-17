@@ -7,18 +7,18 @@ using namespace std;
 
 class Shelter{
   private:
-    int locationID;
+    int shelterID;
     int defensePoints;
-    int forageEase;
+    int suppliesAmount;
   
   public:
     Shelter();
     Shelter(int);
   
     getdefensePoints();
-    getforageEase();
+    getsuppliesAmount();
   
     setdefensePoints(int);
-    setforageEase(int);
+    setsuppliesAmount(int);
 };
 #endif
