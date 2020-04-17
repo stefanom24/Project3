@@ -33,6 +33,7 @@ int split (string splitMe, char separator, string storeArray[], int arraySize)
 }
 
 /////
+#include <ctime>
 int randomNumbers(int min, int max)
 {
     // rand() % (max-min+1) + min
