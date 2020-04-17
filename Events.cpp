@@ -1,4 +1,4 @@
-
+//get rid of events class bc redundent --- from Anuj meeting
 #include <iostream>
 #include "Events.h"
 using namespace std;
