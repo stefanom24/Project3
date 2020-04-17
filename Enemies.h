@@ -23,7 +23,7 @@ class Enemies
     int getStatsAt(int);
    
     void setEnemyname(string);
-    bool setStatesAt(int , int); //takes an index, rating value
+    bool setStatesAt(int , int); //takes an index, stats value
     
 };
 
