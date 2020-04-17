@@ -15,9 +15,11 @@ class Shelter{
     Shelter();
     Shelter(int);
   
+    getshelterID();
     getdefensePoints();
     getsuppliesAmount();
   
+    setshelterID(int);
     setdefensePoints(int);
     setsuppliesAmount(int);
 };
