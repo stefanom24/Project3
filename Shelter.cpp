@@ -25,6 +25,10 @@ Shelter::Shelter(int input_){
     setdefensePoints(10); //High defense.
     setsuppliesAmount(35); //Ultra high supplies.
   }
+//   else
+//   {
+//     cout << "Invalid Option! Hurry and pick a valid shelter or die! << endl;
+//   }
 }
 
 Shelter::setshelterID(int input_){
