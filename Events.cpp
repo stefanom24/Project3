@@ -1,27 +1,46 @@
 #include <iostream>
-#include <fstream>
+
 #include <string>
 
+#include "Enemies.h"
+
 using namespace std;
-Enemie::Enemie()
+
+
+Enemies :: Enemies()
+
 {
-    enemieName = "";
-    int statsSize = 0;
-    for (int i = 0; i<3; i++)
+
+    private:
+
+    string enemyName = "";
+
+    int statSize = 0;
+    for (int i = 0; i<3; i++) //initilizes enemie stats array to 0
     {
-        enemieStats[i] = 0;
-        statsSize++;
+        enemyStats[i] = 0;
+        enemyStats++;
     }
+    
 }
 
 
-string Enemie :: getEnemieName()
+Enemies :: Enemies(string new_enemy)
 {
-    return enemieName;
+    enemyName = new_Enemy;
 }
-int Enemie :: getStatsAt(int i)
+
+   
+
+string Enemies::getEnemyname(string )
 {
-    if ( i < 50 && i >= 0)
+    return enemyName;
+}
+
+
+int Enemies:: getStatsAt(int i)
+{
+    if ( i < 3 && i >= 0)
     {
        return enemieStats[i]; 
     }
@@ -30,19 +49,18 @@ int Enemie :: getStatsAt(int i)
         return -1;
     }
 }
-   
 
 
-void Enemie :: setEnemieName(string new_EnemieName)
+void Enemies:: setEnemyname(string)
 {
-    enemieName = new_EnemieName;
+    enemyName = new_enemy;
 }
-bool Enemie :: setStatsAt(int i, int r) //takes a book index, rating value 
+
+bool Enemies:: setStatesAt(int i, int s) //takes an index, stats value
 {
-    
-    if (  (r >= 0 && r <= 5) && i < 50 && i >= 0) //CHANGE R HERE TO REFLECT ENEMIE STATS
+    if (  (s >= 0 && s <= 5) && i < 3 && i >= 0)
     {
-       enemieStats[i] = r;
+       enemieStats[i] = s;
        return true;
     }
     else 
@@ -50,3 +68,6 @@ bool Enemie :: setStatsAt(int i, int r) //takes a book index, rating value
         return false;
     }
 }
+    
+
+
