@@ -10,19 +10,19 @@ class Enemies
 {
     private:
    
-    string enemieName;
-    int enemieStats[3];
+    string enemyName;
+    int enemyStats[3];
     
    
     public:
     
-    Enemie();
-    Enemie(string);
+    Enemies();
+    Enemies(string);
    
-    string getEnemiename();
+    string getEnemyname();
     int getStatsAt(int);
    
-    void setEnemiename(string);
+    void setEnemyname(string);
     bool setStatesAt(int , int); //takes an index, rating value
     
 };
