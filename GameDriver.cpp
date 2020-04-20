@@ -50,7 +50,24 @@ int main(){
         }
       case 2:
         {
-          cout << "You head to a general store. Outside you see thousands of people running around in a form of organized chaos. to be continued..." << endl;
+          cout << "You head to a general store. Outside you see thousands of people running around in a form of organized chaos." << endl;
+          cout << "As you get to the store, you see many people had the same idea as you and are raiding the store. As you look around the store, you find a First Aid Kit and a Knife." << endl;
+          cout << "As you head for the exit, someone stops you and says 'Sir, please give me one of those things. I got here late and have nothing to take with me, please I have no one to help me!'" << endl;
+          cout << "You face a choice: " << endl;
+          cout << "===== CHOICES =====" << endl;
+          cout << "1. You keep the First Aid Kid and give her the Knife." << endl;
+          cout << "2. You keep the Knife and give her the First Aid Kit." << endl;
+          cin >> input2;
+          if(input2 == 1){
+            // Add First Aid Kit into Inventory.
+          }
+          else if(input2 == 2){
+            // Add Knife into Inventory.
+          }
+          else{
+            cout << "Invalid input. Please try again." << endl;
+            cin >> input2;
+          }
         }
     }
   }
