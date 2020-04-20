@@ -9,6 +9,7 @@ class Player
    
     string playerName;
     int userSupplies[15];
+    int playerHealth;
    
     public:
     
@@ -17,6 +18,9 @@ class Player
    
     string getPlayerName();
     void setPlayerName(string);
+    
+    void setPlayerHealth(int);
+    int getPlayerHealth();
     
 };
 
