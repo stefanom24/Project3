@@ -14,6 +14,7 @@ Enemies :: Enemies()
     private:
 
     string enemyName = "";
+    int enemyHealth = 100;
 
     int statSize = 0;
     for (int i = 0; i<3; i++) //initilizes enemie stats array to 0
@@ -68,6 +69,11 @@ bool Enemies:: setStatesAt(int i, int s) //takes an index, stats value
         return false;
     }
 }
+
+bool Enemies:: setEnemyHealth(int decrease)
+{
+    enemyHealth = enemyHealth - decrease;
+}    
     
 
 
