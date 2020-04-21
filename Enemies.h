@@ -12,6 +12,7 @@ class Enemies
    
     string enemyName;
     int enemyStats[3];
+    int enemyHealth;
     
    
     public:
