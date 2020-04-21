@@ -16,7 +16,7 @@ class Date
     Date(int);
    
     int getDate();
-    int setDate();
+    void setDate(int);
 };
 
 #endif
