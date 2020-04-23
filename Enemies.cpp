@@ -38,17 +38,6 @@ string Enemies::getEnemyname(string )
 }
 
 
-int Enemies:: getStatsAt(int i)
-{
-    if ( i < 3 && i >= 0)
-    {
-       return enemieStats[i]; 
-    }
-    else
-    {
-        return -1;
-    }
-}
 
 void Enemies:: setEnemyHealth(int change)
 {
@@ -59,16 +48,4 @@ void Enemies:: setEnemyname(string)
     enemyName = new_enemy;
 }
 
-bool Enemies:: setStatesAt(int i, int s) //takes an index, stats value
-{
-    if (  (s >= 0 && s <= 5) && i < 3 && i >= 0)
-    {
-       enemieStats[i] = s;
-       return true;
-    }
-    else 
-    {
-        return false;
-    }
-}
    
