@@ -1,6 +1,3 @@
-// use as inventory
-// fixed array of size ?, for weapons/food.
-//foraged items/foraging will come from here
 #include <iostream>
 
 
@@ -17,7 +14,6 @@ class Store
     private:
    
     string weaponsAvail[3];
-    string userWeapon;
     int numMedical;
     
     
@@ -26,12 +22,10 @@ class Store
     Store();
    
     int readWeapons(string);
-    string getUserWeaponName(int);
     
     
     void viewAllItems(string, int);
-    void printWeaponName();
-    void updateWeapon(string, string, int);
+    void updateWeaponsAvail(string, string, int);
     void updateMedical(int, int);
     
 };
