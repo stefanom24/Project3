@@ -1,0 +1,3 @@
+Knife, 10
+Pistol, 25
+Assault Rifle, 35
