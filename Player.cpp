@@ -9,13 +9,13 @@ using namespace std;
 Player::Player()
 {
     playerName = "";
-    int supplySize = 0;
+    //int supplySize = 0;
     playerHealth = 100;
-    for (int i = 0; i<15; i++) //initilizes user/player supplies array to 0
-    {
-        userSupplies[i] = 0;
-        userSupplies++;
-    }
+//     for (int i = 0; i<15; i++) //initilizes user/player supplies array to 0
+//     {
+//         userSupplies[i] = 0;
+//         userSupplies++;
+//     }
 }
 
 Player::Player(string new_player)
