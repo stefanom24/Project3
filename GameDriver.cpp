@@ -147,150 +147,161 @@ int main(){
       cout << "4. Radio in for help! Smaller random chance of finding Healing Items and Food Supplies but no Weapons."
       cout << "5. Check Player weapons "
       cout << "6. Quit."
-      cin >> input;
-      switch(input){
-        case 1:
-        {
-          cout << "You head out to the outer Suburbs to look for loot." << endl;
-          cout << "You come across an abandoned house. You look around and find: "
-          // Random chance of finding medical items.
-          int num = 0;
-          // need to write before calling rand() to seed the random number generator
-          srand(time(0));
-          num = randomNumbers(0,10);
-          if(num == 0){
-            cout << "You have found no Medical Supplies, Weapons, or Food." << endl;
+      while(dayCycle = false){
+        cin >> input;
+        switch(input){
+          case 1:
+          {
+            cout << "You head out to the outer Suburbs to look for loot." << endl;
+            cout << "You come across an abandoned house. You look around and find: "
+            // Random chance of finding medical items.
+            int num = 0;
+            // need to write before calling rand() to seed the random number generator
+            srand(time(0));
+            num = randomNumbers(0,10);
+            if(num == 0){
+              cout << "You have found no Medical Supplies, Weapons, or Food." << endl;
+            }
+            else if(num == 1){
+              cout << "You have found 1 Medical Supplies, an Assault Rifle, and 14 Food." << endl;
+              // Add 1 Medical Supplies to Inventory.
+              // Choose to add Assault Rifle to Inventory.
+              int newSupplies = shel.getsuppliesAmount() + 14;
+              setsuppliesAmount(newSupplies);
+            }
+            else if(num >= 2 && num <= 5){
+              cout << "You have found no Medical Supplies, a Pistol, and 7 Food." << endl;
+              // Choose to add Pistol to Inventory.
+              int newSupplies = shel.getsuppliesAmount() + 7;
+              setsuppliesAmount(newSupplies);
+            }
+            else if(num > 5 && num <= 10){
+              cout << "You have found no Medical Supplies, a Knife, and 0 Food." << endl;
+              // Choose to add Knife to Inventory. 
+            }
+            cout << "You start to make your way back to your shelter." << endl;
+            // Random chance of Alien encounter.
+            int num2 = 0;
+            srand(time(0));
+            num2 = randomNumbers(1,100);
+            if(num2 >= 1 && num2 <= 40){
+              cout << "You have randomly encountered an Alien!" << endl;
+              cout << "Our hero faces a choice: " << endl;
+              cout << "===== CHOICES =====" << endl;
+              cout << "1. Fight!" << endl;
+              cout << "2. Flee!" << endl;
+              cin >> input2;
+              int num3 = 0;
+              num3 = randomNumbers(1,100);
+              switch(input2){
+                case 1:
+                {
+                  cout << "You have chosen to fight the Alien!" << endl << "The Alien is currently equipped with a Knife." << endl;
+                  while(getPlayerHealth() > 0 && getEnemyHealth() > 0){
+                    cout << "----- DISPLAY -----" << endl;
+                    cout << "Player health: " << getPlayerHealth() << endl << "Alien health: " << getEnemyHealth() << endl;
+                    int playerRoll = 0;
+                    int enemyRoll = 0;
+                    playerRoll = randomNumbers(1, 100);
+                    enemyRoll = randomNumbers(1, 100);
+                    playerFight(playerRoll, enemyRoll);
+                  }
+                  if(getPlayerHealth() <= 0){
+                    cout << "===== GAME OVER =====" << endl;
+                    quit = true;
+                    // journaling mechanic
+                    dayCycle = true;
+                    break;
+                  }
+                }
+                case 2:
+                {
+                  if(num3 >= 1 && num3 <= 50){
+                    cout << "You have successfully fleed from the Alien and headed safely to your shelter." << endl;
+                    dayCount++;
+                    dayCycle = true;
+                    break;
+                  }
+                  else{
+                    cout << "You have been wounded as you flee from the Alien." << endl;
+                    // Take X amount of damage to Player health.
+                    dayCount++;
+                    dayCycle = true;
+                    break;
+                  }
+                }
+              }
+            }
           }
-          else if(num == 1){
-            cout << "You have found 1 Medical Supplies, an Assault Rifle, and 14 Food." << endl;
-            // Add 1 Medical Supplies to Inventory.
-            // Choose to add Assault Rifle to Inventory.
-            int newSupplies = shel.getsuppliesAmount() + 14;
-            setsuppliesAmount(newSupplies);
-          }
-          else if(num >= 2 && num <= 5){
-            cout << "You have found no Medical Supplies, a Pistol, and 7 Food." << endl;
-            // Choose to add Pistol to Inventory.
-            int newSupplies = shel.getsuppliesAmount() + 7;
-            setsuppliesAmount(newSupplies);
-          }
-          else if(num > 5 && num <= 10){
-            cout << "You have found no Medical Supplies, a Knife, and 0 Food." << endl;
-            // Choose to add Knife to Inventory. 
-          }
-          cout << "You start to make your way back to your shelter." << endl;
-          // Random chance of Alien encounter.
-          int num2 = 0;
-          srand(time(0));
-          num2 = randomNumbers(1,100);
-          if(num2 >= 1 && num2 <= 40){
-            cout << "You have randomly encountered an Alien!" << endl;
-            cout << "Our hero faces a choice: " << endl;
-            cout << "===== CHOICES =====" << endl;
-            cout << "1. Fight!" << endl;
-            cout << "2. Flee!" << endl;
-            cin >> input2;
-            int num3 = 0;
-            num3 = randomNumbers(1,100);
-            switch(input2){
-              case 1:
-              {
-                cout << "You have chosen to fight the Alien!" << endl << "The Alien is currently equipped with a Knife." << endl;
+          case 2:
+          {
+            int shelterID = getshelterID();
+            string shelterName = "";
+            int bunkerProb = randomNumbers(1, 100);
+            if(shelterID == 1){
+              shelterName = "Friend's Apartment";
+              cout << "You have decided to stay back and bunker down at " << shelterName << "." << endl;
+              if(bunkerProb >= 1 && bunkerProb <= getdefensePoints()){
+                cout << "Your shelter is currently under attack by Aliens!" << endl << "You have to fight for your right to live!" << endl;
                 while(getPlayerHealth() > 0 && getEnemyHealth() > 0){
-                  cout << "----- DISPLAY -----" << endl;
-                  cout << "Player health: " << getPlayerHealth() << endl << "Alien health: " << getEnemyHealth() << endl;
-                  int playerRoll = 0;
-                  int enemyRoll = 0;
-                  playerRoll = randomNumbers(1, 100);
-                  enemyRoll = randomNumbers(1, 100);
-                  playerFight(playerRoll, enemyRoll);
+                    cout << "----- DISPLAY -----" << endl;
+                    cout << "Player health: " << getPlayerHealth() << endl << "Alien health: " << getEnemyHealth() << endl;
+                    int playerRoll = 0;
+                    int enemyRoll = 0;
+                    playerRoll = randomNumbers(1, 100);
+                    enemyRoll = randomNumbers(1, 100);
+                    playerFight(playerRoll, enemyRoll);
                 }
               }
-              case 2:
-              {
-                if(num3 >= 1 && num3 <= 50){
-                  cout << "You have successfully fleed from the Alien and headed safely to your shelter." << endl;
-                  dayCount++;
-                  break;
+              else{
+                cout << "You have a relaxing day at what you call Home now and are now heading to sleep." << endl;
+                // Set up journaling mechanic here. 
+              }
+            }
+            else if(shelterID == 2){
+              shelterName = "Campsite";
+              cout << "You have decided to stay back and bunker down at " << shelterName << "." << endl;
+              if(bunkerProb >= 1 && bunkerProb <= getdefensePoints()){
+                cout << "Your shelter is currently under attack by Aliens!" << endl << "You have to fight for your right to live!" << endl;
+                while(getPlayerHealth() > 0 && getEnemyHealth() > 0){
+                    cout << "----- DISPLAY -----" << endl;
+                    cout << "Player health: " << getPlayerHealth() << endl << "Alien health: " << getEnemyHealth() << endl;
+                    int playerRoll = 0;
+                    int enemyRoll = 0;
+                    playerRoll = randomNumbers(1, 100);
+                    enemyRoll = randomNumbers(1, 100);
+                    playerFight(playerRoll, enemyRoll);
                 }
-                else{
-                  cout << "You have been wounded as you flee from the Alien." << endl;
-                  // Take X amount of damage to Player health.
-                  dayCount++;
-                  break;
+              }
+              else{
+                cout << "You have a relaxing day at what you call Home now and are now heading to sleep." << endl;
+                // Set up journaling mechanic here. 
+              }
+            }
+            else if(shelterID == 3){
+              shelterName = "Bunker";
+              cout << "You have decided to stay back and bunker down at " << shelterName << "." << endl;
+              if(bunkerProb >= 1 && bunkerProb <= getdefensePoints()){
+                cout << "Your shelter is currently under attack by Aliens!" << endl << "You have to fight for your right to live!" << endl;
+                while(getPlayerHealth() > 0 && getEnemyHealth() > 0){
+                    cout << "----- DISPLAY -----" << endl;
+                    cout << "Player health: " << getPlayerHealth() << endl << "Alien health: " << getEnemyHealth() << endl;
+                    int playerRoll = 0;
+                    int enemyRoll = 0;
+                    playerRoll = randomNumbers(1, 100);
+                    enemyRoll = randomNumbers(1, 100);
+                    playerFight(playerRoll, enemyRoll);
                 }
               }
-            }
-          }
-        }
-        case 2:
-        {
-          int shelterID = getshelterID();
-          string shelterName = "";
-          int bunkerProb = randomNumbers(1, 100);
-          if(shelterID == 1){
-            shelterName = "Friend's Apartment";
-            cout << "You have decided to stay back and bunker down at " << shelterName << "." << endl;
-            if(bunkerProb >= 1 && bunkerProb <= getdefensePoints()){
-              cout << "Your shelter is currently under attack by Aliens!" << endl << "You have to fight for your right to live!" << endl;
-              while(getPlayerHealth() > 0 && getEnemyHealth() > 0){
-                  cout << "----- DISPLAY -----" << endl;
-                  cout << "Player health: " << getPlayerHealth() << endl << "Alien health: " << getEnemyHealth() << endl;
-                  int playerRoll = 0;
-                  int enemyRoll = 0;
-                  playerRoll = randomNumbers(1, 100);
-                  enemyRoll = randomNumbers(1, 100);
-                  playerFight(playerRoll, enemyRoll);
+              else{
+                cout << "You have a relaxing day at what you call Home now and are now heading to sleep." << endl;
+                // Set up journaling mechanic here. 
               }
             }
-            else{
-              cout << "You have a relaxing day at what you call Home now and are now heading to sleep." << endl;
-              // Set up journaling mechanic here. 
-            }
+            
+            
+            
           }
-          else if(shelterID == 2){
-            shelterName = "Campsite";
-            cout << "You have decided to stay back and bunker down at " << shelterName << "." << endl;
-            if(bunkerProb >= 1 && bunkerProb <= getdefensePoints()){
-              cout << "Your shelter is currently under attack by Aliens!" << endl << "You have to fight for your right to live!" << endl;
-              while(getPlayerHealth() > 0 && getEnemyHealth() > 0){
-                  cout << "----- DISPLAY -----" << endl;
-                  cout << "Player health: " << getPlayerHealth() << endl << "Alien health: " << getEnemyHealth() << endl;
-                  int playerRoll = 0;
-                  int enemyRoll = 0;
-                  playerRoll = randomNumbers(1, 100);
-                  enemyRoll = randomNumbers(1, 100);
-                  playerFight(playerRoll, enemyRoll);
-              }
-            }
-            else{
-              cout << "You have a relaxing day at what you call Home now and are now heading to sleep." << endl;
-              // Set up journaling mechanic here. 
-            }
-          }
-          else if(shelterID == 3){
-            shelterName = "Bunker";
-            cout << "You have decided to stay back and bunker down at " << shelterName << "." << endl;
-            if(bunkerProb >= 1 && bunkerProb <= getdefensePoints()){
-              cout << "Your shelter is currently under attack by Aliens!" << endl << "You have to fight for your right to live!" << endl;
-              while(getPlayerHealth() > 0 && getEnemyHealth() > 0){
-                  cout << "----- DISPLAY -----" << endl;
-                  cout << "Player health: " << getPlayerHealth() << endl << "Alien health: " << getEnemyHealth() << endl;
-                  int playerRoll = 0;
-                  int enemyRoll = 0;
-                  playerRoll = randomNumbers(1, 100);
-                  enemyRoll = randomNumbers(1, 100);
-                  playerFight(playerRoll, enemyRoll);
-              }
-            }
-            else{
-              cout << "You have a relaxing day at what you call Home now and are now heading to sleep." << endl;
-              // Set up journaling mechanic here. 
-            }
-          }
-          
-          
-          
         }
       }
     }
