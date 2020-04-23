@@ -19,6 +19,7 @@ class Player
     string playerName;
     string weaponName;
     int playerHealth;
+    int playerMedSupplies;
 
     //int userSupplies[15];
 
@@ -37,11 +38,14 @@ class Player
     string getPlayerName();
     string getWeaponName();
     int getPlayerHealth();
+    int getPlayerMedSupplies();
     
 
     void setPlayerName(string);
     void setWeaponName(string);
     void setPlayerHealth(int);
+    void setPlayerHealing(int);
+    void setPlayerMedSupplies(int);
     
 
 };
