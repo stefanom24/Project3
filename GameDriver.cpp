@@ -12,6 +12,38 @@ int randomNumbers(int min, int max)
     return (rand() % (max-min+1)) + min;
 }
 
+int playerFight(int playerRoll, int enemyRoll){
+  if(playerRoll > enemyRoll){
+    cout << "Player is doing damage to Alien!" << endl;
+    Player pl;
+    pl.getWeaponName;
+    if(pl == "Knife"){
+      int damage = playerRoll - enemyRoll * 1;
+      int newEnemyHealth = getEnemyHealth() - damage;
+      setEnemyHealth(newEnemyHealth);
+    }
+    else if(pl == "Pistol"){
+      int damage = playerRoll - enemyRoll * 2;
+      int newEnemyHealth = getEnemyHealth() - damage;
+      setEnemyHealth(newEnemyHealth);
+    }
+    else if(pl == "Assault Rifle"){
+      int damage = playerRoll - enemyRoll * 3;
+      int newEnemyHealth = getEnemyHealth() - damage;
+      setEnemyHealth(newEnemyHealth);
+    }
+  }
+  else if(enemyRoll > playerRoll){
+    cout << "Alien is doing damage to Player!" << endl;
+    int damage = enemyRoll - playerRoll;
+    int newPlayerHealth = getPlayerHealth - damage;
+    setPlayerHealth(newPlayerHealth);
+  }
+  else{
+    cout << "Player and enemy have rolled the same number! No damage is dealt to either Player or Enemy." << endl;
+  }
+}
+
 int main(){
   bool quit = false;
   int dayCount = 1;
@@ -92,6 +124,7 @@ int main(){
     cout << "March 8th, 20??" << endl << "Day 2" << endl;
     cout << "You wake up and feel refreshed from last night's sleep." << endl;
     cout << "You have this many supplies: " << shel.getsuppliesAmount << endl << "Remember you need 7 supplies a day to survive the full 7 days." << endl;
+    // Subtract 7 supplies from Supplies Amount. 
     cout << "With that in mind what would you like to do today?" << endl;
     cout << "===== CHOICES =====" << endl;
     cout << "1. Go out looting for supplies." << endl;
@@ -134,6 +167,42 @@ int main(){
         num2 = randomNumbers(1,100);
         if(num2 >= 1 && num2 <= 40){
           cout << "You have randomly encountered an Alien!" << endl;
+          cout << "Our hero faces a choice: " << endl;
+          cout << "===== CHOICES =====" << endl;
+          cout << "1. Fight!" << endl;
+          cout << "2. Flee!" << endl;
+          cin >> input2;
+          int num3 = 0;
+          num3 = randomNumbers(1,100);
+          switch(input2){
+            case 1:
+            {
+              cout << "You have chosen to fight the Alien!" << endl << "The Alien is currently equipped with a Knife." << endl;
+              while(getPlayerHealth > 0 && getEnemyHealth > 0){
+                cout << "----- DISPLAY -----" << endl;
+                cout << "Player health: " << getPlayerHealth << endl << "Alien health: " << getEnemyHealth << endl;
+                int playerRoll = 0;
+                int enemyRoll = 0;
+                playerRoll = randomNumbers(1, 100);
+                enemyRoll = randomNumbers(1, 100);
+                playerFight(playerRoll, enemyRoll);
+              }
+            }
+            case 2:
+            {
+              if(num3 >= 1 && num3 <= 50){
+                cout << "You have successfully fleed from the Alien and headed safely to your shelter." << endl;
+                dayCount++;
+                break;
+              }
+              else{
+                cout << "You have been wounded as you flee from the Alien." << endl;
+                // Take X amount of damage to Player health.
+                dayCount++;
+                break;
+              }
+            }
+          }
         }
       }
     }
