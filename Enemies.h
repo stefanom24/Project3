@@ -9,23 +9,30 @@ using namespace std;
 class Enemies
 {
     private:
-   
-    string enemyName;
-    int enemyStats[3];
-    int enemyHealth;
+   string enemyName;
+
+    int enemieStats[3];
+
     
-   
     public:
-    
-    Enemies();
-    Enemies(string);
+
    
+    Enemy();
+
+    Enemy(string);
+
+   
+
     string getEnemyname();
+
     int getStatsAt(int);
+    int getEnemyHealth();
+
    
+
     void setEnemyname(string);
-    bool setStatsAt(int , int); //takes an index, stats value
-    bool setHealthAt(int, int);//use instead of setStats???
+    void setEnemyHealth(int);
+   
     
 };
 
