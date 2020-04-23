@@ -140,14 +140,15 @@ int main(){
       cout << "You have this many supplies: " << shel.getsuppliesAmount << endl << "Remember you need 7 supplies a day to survive the full 7 days." << endl;
       // Subtract 7 supplies from Supplies Amount. 
       cout << "With that in mind what would you like to do today?" << endl;
-      cout << "===== CHOICES =====" << endl;
-      cout << "1. Go out looting for supplies." << endl;
-      cout << "2. Bunker down at home (keep in mind depending on the shelter you picked you'll have a chance of a random encounter with an Alien)." << endl;
-      cout << "3. Check Player health (you can heal yourself and still choose "
-      cout << "4. Radio in for help! Smaller random chance of finding Healing Items and Food Supplies but no Weapons."
-      cout << "5. Check Player weapons "
-      cout << "6. Quit."
+       
       while(dayCycle = false){
+        cout << "===== CHOICES =====" << endl;
+        cout << "1. Go out looting for supplies." << endl; // Day cycle ends after this. 
+        cout << "2. Bunker down at home (keep in mind depending on the shelter you picked you'll have a chance of a random encounter with an Alien)." << endl; // Day cycle ends after this.
+        cout << "3. Check Player health (you can heal yourself and still choose other options)." << endl;
+        cout << "4. Radio in for help! Smaller random chance of finding Healing Items and Food Supplies but no Weapons." << endl; // Day cycle ends after this.
+        cout << "5. Check Player weapons." << endl;
+        cout << "6. Quit." << endl; // Game ends.
         cin >> input;
         switch(input){
           case 1:
@@ -213,6 +214,11 @@ int main(){
                     dayCycle = true;
                     break;
                   }
+                  else if(getPlayerHealth() > 0 && getEnemyHealth() <= 0){
+                    cout << "Alien killed." << endl << "You escape before Alien reinforcements show up and head towards your shelter." << endl;
+                    dayCycle = true;
+                    break;
+                  }
                 }
                 case 2:
                 {
@@ -252,6 +258,18 @@ int main(){
                     enemyRoll = randomNumbers(1, 100);
                     playerFight(playerRoll, enemyRoll);
                 }
+                if(getPlayerHealth() <= 0){
+                  cout << "===== GAME OVER =====" << endl;
+                    quit = true;
+                    // journaling mechanic
+                    dayCycle = true;
+                    break;
+                }
+                else if(getPlayerHealth() > 0 && getEnemyHealth() <= 0){
+                    cout << "Alien killed." << endl << "You escape before Alien reinforcements show up and head towards your shelter." << endl;
+                    dayCycle = true;
+                    break;
+                }
               }
               else{
                 cout << "You have a relaxing day at what you call Home now and are now heading to sleep." << endl;
@@ -271,6 +289,18 @@ int main(){
                     playerRoll = randomNumbers(1, 100);
                     enemyRoll = randomNumbers(1, 100);
                     playerFight(playerRoll, enemyRoll);
+                }
+                if(getPlayerHealth() <= 0){
+                  cout << "===== GAME OVER =====" << endl;
+                    quit = true;
+                    // journaling mechanic
+                    dayCycle = true;
+                    break;
+                }
+                else if(getPlayerHealth() > 0 && getEnemyHealth() <= 0){
+                    cout << "Alien killed." << endl << "You escape before Alien reinforcements show up and head towards your shelter." << endl;
+                    dayCycle = true;
+                    break;
                 }
               }
               else{
@@ -292,15 +322,75 @@ int main(){
                     enemyRoll = randomNumbers(1, 100);
                     playerFight(playerRoll, enemyRoll);
                 }
+                if(getPlayerHealth() <= 0){
+                  cout << "===== GAME OVER =====" << endl;
+                    quit = true;
+                    // journaling mechanic
+                    dayCycle = true;
+                    break;
+                }
+                else if(getPlayerHealth() > 0 && getEnemyHealth() <= 0){
+                    cout << "Alien killed." << endl << "You escape before Alien reinforcements show up and head towards your shelter." << endl;
+                    dayCycle = true;
+                    break;
+                }
               }
               else{
                 cout << "You have a relaxing day at what you call Home now and are now heading to sleep." << endl;
                 // Set up journaling mechanic here. 
+                dayCycle = true;
+                break;
               }
             }
             
             
             
+          }
+          case 3: // Player health
+          {
+            cout << "You check on your health." << endl << "Player health: " << getPlayerHealth() << endl;
+            cout << "===== CHOICES =====" << endl;
+            cout << "1. Heal yourself." << endl;
+            cout << "2. Go back and choose something else to do." << endl;
+            cin >> input2;
+            if(input2 == 1){
+              // Healing mechanic.
+              cout << "You heal yourself." << endl << "Player health: " << getPlayerHealth() << endl;
+              break;
+            }
+            if(input2 == 2){
+              cout << "What would you like to do today?" << endl;
+              break;
+            }
+          }
+          case 4: // Radio in for help.
+          {
+            cout << "There is an old radio lying around somewhere in your shelter. You can try and Radio for some help but you know there's a big chance no one will answer." << endl;
+            cout << "35% chance of receiving 1 Medical Supply and 7 Food." << endl;
+            int radioProb = randomNumbers(1, 100);
+            if(radioProb >= 1 && radioProb <= 35){
+              int newSupplies = getsuppliesAmount() + 7;
+              setsuppliesAmount(newSupplies);
+              // Increase health items by 1.
+              cout << "You have succesfully contacted some people who said they'll give you some of their supplies. They're sending over 7 Food and 1 First Aid Kit." << endl;
+              dayCycle = true;
+              break;
+            }
+            else{
+              cout << "You try for a whole day to get someone on the radio but to no success. You feel like you wasted the day away." << endl;
+              dayCycle = true;
+              break;
+            }
+          }
+          case 5:
+          {
+            
+          }
+          case 6: //Quit.
+          {
+            cout << "Goodbye!" << endl;
+            quit = true;
+            break;
           }
         }
       }
