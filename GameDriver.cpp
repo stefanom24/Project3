@@ -3,10 +3,20 @@
 #include <fstream>
 #include <iomanip>
 using namespace std;
+#include <cstlib>
+#include <ctime>
+
+int randomNumbers(int min, int max)
+{
+    // rand() % (max-min+1) + min
+    return (rand() % (max-min+1)) + min;
+}
 
 int main(){
   bool quit = false;
-  while(1){
+  int dayCount = 1;
+  
+  while(dayCount == 1){
     int input;
     int input2;
     Shelter shel;
@@ -46,6 +56,7 @@ int main(){
             cout << "Wrong input. Please try again." << endl;
             //Route back to case 1.
           }
+          dayCount++;
           break;
         }
       case 2:
@@ -68,7 +79,63 @@ int main(){
             cout << "Invalid input. Please try again." << endl;
             cin >> input2;
           }
+          dayCount++;
+          break;
         }
+    }
+  }
+  
+  while(dayCount == 2){
+    int input;
+    int input2;
+    Shelter shel;
+    cout << "March 8th, 20??" << endl << "Day 2" << endl;
+    cout << "You wake up and feel refreshed from last night's sleep." << endl;
+    cout << "You have this many supplies: " << shel.getsuppliesAmount << endl << "Remember you need 7 supplies a day to survive the full 7 days." << endl;
+    cout << "With that in mind what would you like to do today?" << endl;
+    cout << "===== CHOICES =====" << endl;
+    cout << "1. Go out looting for supplies." << endl;
+    cout << "2. Bunker down at home (keep in mind depending on the shelter you picked you'll have a chance of a random encounter with an Alien)." << endl;
+    cin >> input;
+    switch(input){
+      case 1:
+      {
+        cout << "You head out to the outer Suburbs to look for loot." << endl;
+        cout << "You come across an abandoned house. You look around and find: "
+        // Random chance of finding medical items.
+        int num = 0;
+        // need to write before calling rand() to seed the random number generator
+        srand(time(0));
+        num = randomNumbers(0,10);
+        if(num == 0){
+          cout << "You have found no Medical Supplies, Weapons, or Food." << endl;
+        }
+        else if(num == 1){
+          cout << "You have found 1 Medical Supplies, an Assault Rifle, and 14 Food." << endl;
+          // Add 1 Medical Supplies to Inventory.
+          // Choose to add Assault Rifle to Inventory.
+          int newSupplies = shel.getsuppliesAmount() + 14;
+          setsuppliesAmount(newSupplies);
+        }
+        else if(num >= 2 && num <= 5){
+          cout << "You have found no Medical Supplies, a Pistol, and 7 Food." << endl;
+          // Choose to add Pistol to Inventory.
+          int newSupplies = shel.getsuppliesAmount() + 7;
+          setsuppliesAmount(newSupplies);
+        }
+        else if(num > 5 && num <= 10){
+          cout << "You have found no Medical Supplies, a Knife, and 0 Food." << endl;
+          // Choose to add Knife to Inventory. 
+        }
+        cout << "You start to make your way back to your shelter." << endl;
+        // Random chance of Alien encounter.
+        int num2 = 0;
+        srand(time(0));
+        num2 = randomNumbers(1,100);
+        if(num2 >= 1 && num2 <= 40){
+          cout << "You have randomly encountered an Alien!" << endl;
+        }
+      }
     }
   }
 }
