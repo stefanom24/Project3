@@ -14,7 +14,8 @@
 #include <iomanip>
 
 #include "Store.h"
-
+#include "Player.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -55,21 +56,21 @@ int split (string splitMe, char separator, string storeArray[], int arraySize)
 Store:Store()
 {
     numMedical = 0;
+    //initialize weapons array
 }
 
-int Store :: getWeaponName()
+int Store :: getWeaponName(int )
 {
     return weaponName;
 }
 
 
 
-void Library :: updateMedical( int newMedical)
+void Store :: updateMedical( int newMedical)
+{
+   numMedical = numMedical;
+} 
+void Store :: updateWeaponsAvail(string newUserWeapon, string currentUserWeapon)
 {
    
 } 
-void Library :: updateWeapon(string userName, string title, int newRating)
-{
-   
-} 
-
